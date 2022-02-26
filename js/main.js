@@ -3,11 +3,11 @@ function getRandom (min, max) {
     return;
   }
 
-  return (max > min) ? Math.round(min + (max - min) * Math.random())
-    : Math.round(max + (min - max) * Math.random());
+  if (max < min) {[min, max]=[max, min];}
+  return Math.round(min + (max - min) * Math.random());
 }
 
-const checkLine = (line, maxLength) => (line.length <= maxLength);
+const checkLine = (line, maxLength) => line.length <= maxLength;
 
-getRandom(12, 12);
+getRandom(112, 12);
 checkLine('Hello, world!', 100);
