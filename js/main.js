@@ -37,16 +37,6 @@ const descriptions = [
   'Едем на рыбалку'
 ];
 
-function getRandom (min, max) {
-  [min, max]=[Math.abs(min), Math.abs(max)];
-  if (max < min) {[min, max]=[max, min];}
-  return Math.round(min + (max - min) * Math.random());
-}
-
-const checkLine = (line, maxLength) => line.length <= maxLength;
-
-checkLine('Hello, world!', 100);
-
 const CommentsIdCount = {
   MIN: 1,
   MAX: 999
@@ -72,12 +62,22 @@ const NamesCount = {
   MAX: 9
 };
 
-const POSTS_NUMBER = 25;
-
 const LikesCount = {
   MIN: 15,
   MAX: 200
 };
+
+const POSTS_NUMBER = 25;
+
+function getRandom (min, max) {
+  [min, max]=[Math.abs(min), Math.abs(max)];
+  if (max < min) {[min, max]=[max, min];}
+  return Math.round(min + (max - min) * Math.random());
+}
+
+const checkLine = (line, maxLength) => line.length <= maxLength;
+
+checkLine('Hello, world!', 100);
 
 const commentsId = [];              // массив для хранения уникальных id для комментариев
 function getCommentId () {
