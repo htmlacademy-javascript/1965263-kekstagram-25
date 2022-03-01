@@ -1,17 +1,3 @@
-function getRandom (min, max) {
-  if (max < 0 || min < 0) {
-    return;
-  }
-
-  if (max < min) {[min, max]=[max, min];}
-  return Math.round(min + (max - min) * Math.random());
-}
-
-const checkLine = (line, maxLength) => line.length <= maxLength;
-
-getRandom(112, 12);
-checkLine('Hello, world!', 100);
-
 const messages = [
   'Всё отлично!',
   'В целом всё неплохо. Но не всё.',
@@ -51,11 +37,53 @@ const descriptions = [
   'Едем на рыбалку'
 ];
 
+function getRandom (min, max) {
+  [min, max]=[Math.abs(min), Math.abs(max)];
+  if (max < min) {[min, max]=[max, min];}
+  return Math.round(min + (max - min) * Math.random());
+}
+
+const checkLine = (line, maxLength) => line.length <= maxLength;
+
+checkLine('Hello, world!', 100);
+
+const CommentsIdCount = {
+  MIN: 1,
+  MAX: 999
+};
+
+const CommentsCount = {
+  MIN: 1,
+  MAX: 15
+};
+
+const AvatarUrlCount = {
+  MIN: 1,
+  MAX: 6
+};
+
+const MessagesCount = {
+  MIN: 0,
+  MAX: 5
+};
+
+const NamesCount = {
+  MIN: 0,
+  MAX: 9
+};
+
+const POSTS_NUMBER = 25;
+
+const LikesCount = {
+  MIN: 15,
+  MAX: 200
+};
+
 const commentsId = [];              // массив для хранения уникальных id для комментариев
 function getCommentId () {
-  let id = getRandom(1, 999);
+  let id = getRandom(CommentsIdCount.MIN, CommentsIdCount.MAX);
   while (commentsId.some((item) => item === id)) {
-    id = getRandom(1, 999);
+    id = getRandom(CommentsIdCount.MIN, CommentsIdCount.MAX);
   }
 
   commentsId.push(id);
@@ -64,22 +92,22 @@ function getCommentId () {
 
 function createComments () {
   const comments = [];
-  for (let i=0; i<getRandom(1, 15); i++) {
+  for (let i=0; i<getRandom(CommentsCount.MIN, CommentsCount.MAX); i++) {
     comments.push({
       id: getCommentId(),
-      avatar: `img/avatar-${getRandom(1, 6)}.svg`,
-      message: messages[getRandom(0, 5)],
-      name: names[getRandom(0, 9)]
+      avatar: `img/avatar-${getRandom(AvatarUrlCount.MIN, AvatarUrlCount.MAX)}.svg`,
+      message: messages[getRandom(MessagesCount.MIN, MessagesCount.MAX)],
+      name: names[getRandom(NamesCount.MIN, NamesCount.MAX)]
     });
   }
   return comments;
 }
 
-const fakeServerResponse = () => Array.from({length: 25}, (item, index) => ({
+const fakeServerResponse = () => Array.from({length: POSTS_NUMBER}, (item, index) => ({
   id: index+1,
   url: `photos/${index+1}.jpg`,
   description: descriptions[index],
-  likes: getRandom(15, 200),
+  likes: getRandom(LikesCount.MIN, LikesCount.MAX),
   comments: createComments()
 }));
 
