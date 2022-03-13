@@ -1,4 +1,4 @@
-function renderData(data) {
+function renderThumbnails(data) {
   const thumbnailsContainer = document.querySelector('.pictures');
   const thumbnailTemplate = document.querySelector('#picture').content.querySelector('.picture');
   const tempContainer = document.createDocumentFragment();
@@ -20,4 +20,4 @@ function renderData(data) {
   thumbnailsContainer.append(tempContainer);
 }
 
-export {renderData};
+export {renderThumbnails};
