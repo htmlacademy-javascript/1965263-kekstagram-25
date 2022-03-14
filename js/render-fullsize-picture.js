@@ -2,6 +2,8 @@ function renderCommentsBlock (comments) {
   const commentsContainer = document.querySelector('.social__comments');
   const tempContainer = document.createDocumentFragment();
 
+  commentsContainer.innerHTML = '';
+
   comments.forEach((item) => {
     const Commentator = {
       AVATAR: item.avatar,

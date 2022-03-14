@@ -8,8 +8,26 @@ const closeBigPictureButton = document.querySelector('.big-picture__cancel');
 
 renderThumbnails(data);
 
-picturesContainer.addEventListener('click', (evt) => {
-  evt.preventDefault();
+const onCloseBigPictureButtonClick = () => {
+  closeBigPicture();
+};
+
+const onDocumentEscKeydown = (evt) => {
+  if (evt.key === 'Escape') {
+    closeBigPicture();
+  }
+};
+
+function closeBigPicture () {
+  document.querySelector('.big-picture').classList.add('hidden');
+  document.body.classList.remove('modal-open');
+
+  closeBigPictureButton.removeEventListener('click', onCloseBigPictureButtonClick);
+
+  document.removeEventListener('keydown', onDocumentEscKeydown);
+}
+
+function openBigPicture (evt) {
   const targetItem = evt.target.closest('a');
   const itemCollection = targetItem.parentElement.querySelectorAll('.picture');
   itemCollection.forEach((item, index) => {
@@ -17,16 +35,12 @@ picturesContainer.addEventListener('click', (evt) => {
       renderFullsizePicture(data[index]);
     }
   });
-});
 
-closeBigPictureButton.addEventListener('click', () => {
-  document.querySelector('.big-picture').classList.add('hidden');
-  document.body.classList.remove('modal-open');
-});
+  closeBigPictureButton.addEventListener('click', onCloseBigPictureButtonClick);
 
-document.addEventListener('keydown', (evt) => {
-  if (evt.key === 'Escape') {
-    document.querySelector('.big-picture').classList.add('hidden');
-    document.body.classList.remove('modal-open');
-  }
+  document.addEventListener('keydown', onDocumentEscKeydown);
+}
+
+picturesContainer.addEventListener('click', (evt) => {
+  openBigPicture(evt);
 });
