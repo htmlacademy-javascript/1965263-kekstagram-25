@@ -29,7 +29,7 @@ function closeBigPicture () {
 
 function openBigPicture (evt) {
   const targetItem = evt.target.closest('a');
-  const itemCollection = targetItem.parentElement.querySelectorAll('.picture');
+  const itemCollection = picturesContainer.querySelectorAll('.picture');
   itemCollection.forEach((item, index) => {
     if (item === targetItem) {
       renderFullsizePicture(data[index]);

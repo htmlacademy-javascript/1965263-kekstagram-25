@@ -1403,3 +1403,16 @@ main {
 .hidden {
   display: none;
 }
+
+.img-upload__error {
+  color: greenyellow;
+  font-size: 10px;
+  /* align-self: flex-start; */
+  /* margin-left: 70px; */
+}
+
+/* .text__wrapper {
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: flex-start;
+} */
