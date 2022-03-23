@@ -42,8 +42,6 @@ function getRandom (min, max) {
 
 const checkLine = (line, maxLength) => line.length <= maxLength;
 
-checkLine('Hello, world!', 100);
-
 const commentsId = [];              // массив для хранения уникальных id для комментариев
 function getCommentId () {
   let id = getRandom(CommentsIdCount.MIN, CommentsIdCount.MAX);
@@ -70,3 +68,4 @@ function createComments () {
 
 export {getRandom};
 export {createComments};
+export {checkLine};

@@ -1403,3 +1403,8 @@ main {
 .hidden {
   display: none;
 }
+
+.img-upload__error {
+  color: greenyellow;
+  font-size: 10px;
+}
