@@ -30,7 +30,7 @@ function closeBigPicture () {
 
   closeBigPictureButton.removeEventListener('click', onCloseBigPictureButtonClick);
   document.removeEventListener('keydown', onDocumentEscKeydown);
-  commentsLoader.addEventListener('click', onCommentsLoaderButtonClick);
+  commentsLoader.removeEventListener('click', onCommentsLoaderButtonClick);
 }
 
 function openBigPicture (evt) {
