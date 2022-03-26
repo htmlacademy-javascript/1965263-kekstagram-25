@@ -1,8 +1,10 @@
+const SHOWN_COMMENTS_MAX_COUNT = 5;
+
 function renderCommentsBlock (comments) {
-  const commentsContainer = document.querySelector('.social__comments');
+  const commentsContainerElement = document.querySelector('.social__comments');
   const tempContainer = document.createDocumentFragment();
 
-  commentsContainer.innerHTML = '';
+  commentsContainerElement.innerHTML = '';
 
   comments.forEach((item, index) => {
     const Commentator = {
@@ -10,49 +12,48 @@ function renderCommentsBlock (comments) {
       NAME: item.name,
       MESSAGE: item.message
     };
-    const commentsItem = document.createElement('li');
+    const commentElement = document.createElement('li');
 
-    commentsItem.classList.add('social__comment');
-    if (index >= 5) {
-      commentsItem.classList.add('hidden');
+    commentElement.classList.add('social__comment');
+    if (index >= SHOWN_COMMENTS_MAX_COUNT) {
+      commentElement.classList.add('hidden');
     }
-    commentsItem.innerHTML = `<img class="social__picture" src="${Commentator.AVATAR}" alt="${Commentator.NAME}" width="35" height="35"><p class="social__text">${Commentator.MESSAGE}</p>`;
-    tempContainer.append(commentsItem);
+    commentElement.innerHTML = `<img class="social__picture" src="${Commentator.AVATAR}" alt="${Commentator.NAME}" width="35" height="35"><p class="social__text">${Commentator.MESSAGE}</p>`;
+    tempContainer.append(commentElement);
   });
-  commentsContainer.append(tempContainer);
+  commentsContainerElement.append(tempContainer);
 }
 
 function showMoreComments () {
-  const commentsContainer = document.querySelector('.social__comments');
-  const allComments = commentsContainer.querySelectorAll('.social__comment');
-  const socialCommentCount = document.querySelector('.social__comment-count');
-  const hiddenComments = commentsContainer.querySelectorAll('.hidden');
-  const commentsLoader = document.querySelector('.comments-loader');
+  const commentsContainerElement = document.querySelector('.social__comments');
+  const allCommentElements = commentsContainerElement.querySelectorAll('.social__comment');
+  const socialCommentCountElement = document.querySelector('.social__comment-count');
+  const hiddenCommentElements = commentsContainerElement.querySelectorAll('.hidden');
+  const commentsLoaderElement = document.querySelector('.comments-loader');
 
-  const ALL_COMMENTS_COUNT = allComments.length;
-  const HIDDEN_COMMENTS_COUNT = hiddenComments.length;
-  const SHOWN_COMMENTS_COUNT = ALL_COMMENTS_COUNT - HIDDEN_COMMENTS_COUNT;
-  const SHOWN_COMMENTS_MAX_COUNT = 5;
+  const allCommentsCount = allCommentElements.length;
+  const hiddenCommentsCount = hiddenCommentElements.length;
+  const shownCommentsCount = allCommentsCount - hiddenCommentsCount;
 
-  if (HIDDEN_COMMENTS_COUNT <= SHOWN_COMMENTS_MAX_COUNT) {
-    hiddenComments.forEach((item) => item.classList.remove('hidden'));
-    socialCommentCount.innerHTML = `${SHOWN_COMMENTS_COUNT + HIDDEN_COMMENTS_COUNT} из <span class="comments-count">${ALL_COMMENTS_COUNT}</span> комментариев`;
-    commentsLoader.classList.add('hidden');
+  if (hiddenCommentsCount <= SHOWN_COMMENTS_MAX_COUNT) {
+    hiddenCommentElements.forEach((item) => item.classList.remove('hidden'));
+    socialCommentCountElement.innerHTML = `${shownCommentsCount + hiddenCommentsCount} из <span class="comments-count">${allCommentsCount}</span> комментариев`;
+    commentsLoaderElement.classList.add('hidden');
   } else {
     for (let i=0; i<SHOWN_COMMENTS_MAX_COUNT; i++) {
-      hiddenComments[i].classList.remove('hidden');
+      hiddenCommentElements[i].classList.remove('hidden');
     }
-    socialCommentCount.innerHTML = `${SHOWN_COMMENTS_COUNT + SHOWN_COMMENTS_MAX_COUNT} из <span class="comments-count">${ALL_COMMENTS_COUNT}</span> комментариев`;
+    socialCommentCountElement.innerHTML = `${shownCommentsCount + SHOWN_COMMENTS_MAX_COUNT} из <span class="comments-count">${allCommentsCount}</span> комментариев`;
   }
 }
 
 function renderFullsizePicture (data) {
-  const bigPicture = document.querySelector('.big-picture');
-  const bigPicImg = bigPicture.querySelector('.big-picture__img').querySelector('img');
-  const pictureDescription = bigPicture.querySelector('.social__caption');
-  const likesCount = bigPicture.querySelector('.likes-count');
-  const socialCommentCount = bigPicture.querySelector('.social__comment-count');
-  const commentsLoader = document.querySelector('.comments-loader');
+  const bigPictureElement = document.querySelector('.big-picture');
+  const bigPicImageElement = bigPictureElement.querySelector('.big-picture__img').querySelector('img');
+  const pictureDescriptionElement = bigPictureElement.querySelector('.social__caption');
+  const likesCountElement = bigPictureElement.querySelector('.likes-count');
+  const commentsCountElement = bigPictureElement.querySelector('.social__comment-count');
+  const commentsLoaderElement = document.querySelector('.comments-loader');
   const PictureData = {
     URL: data.url,
     DESCRIPTION: data.description,
@@ -62,15 +63,15 @@ function renderFullsizePicture (data) {
     COMMENTS_MAX_COUNT: 5
   };
 
-  bigPicImg.src = PictureData.URL;
-  pictureDescription.textContent = PictureData.DESCRIPTION;
-  likesCount.textContent = PictureData.LIKES;
-  socialCommentCount.innerHTML = `${PictureData.COMMENTS_TOTAL_COUNT < PictureData.COMMENTS_MAX_COUNT ? PictureData.COMMENTS_TOTAL_COUNT : PictureData.COMMENTS_MAX_COUNT} из <span class="comments-count">${PictureData.COMMENTS_TOTAL_COUNT}</span> комментариев`;
+  bigPicImageElement.src = PictureData.URL;
+  pictureDescriptionElement.textContent = PictureData.DESCRIPTION;
+  likesCountElement.textContent = PictureData.LIKES;
+  commentsCountElement.innerHTML = `${PictureData.COMMENTS_TOTAL_COUNT < PictureData.COMMENTS_MAX_COUNT ? PictureData.COMMENTS_TOTAL_COUNT : PictureData.COMMENTS_MAX_COUNT} из <span class="comments-count">${PictureData.COMMENTS_TOTAL_COUNT}</span> комментариев`;
   renderCommentsBlock(PictureData.COMMENTS_DATA);
-  bigPicture.classList.remove('hidden');
-  commentsLoader.classList.add('hidden');
+  bigPictureElement.classList.remove('hidden');
+  commentsLoaderElement.classList.add('hidden');
   if (PictureData.COMMENTS_TOTAL_COUNT > PictureData.COMMENTS_MAX_COUNT) {
-    commentsLoader.classList.remove('hidden');
+    commentsLoaderElement.classList.remove('hidden');
   }
   document.body.classList.add('modal-open');
 }
