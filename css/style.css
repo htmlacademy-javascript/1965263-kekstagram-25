@@ -1416,3 +1416,8 @@ main {
 .hidden {
   display: none;
 }
+
+.img-upload__error {
+  font-size: 10px;
+  color: greenyellow;
+}

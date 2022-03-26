@@ -6,6 +6,7 @@
   <link rel="stylesheet" href="css/normalize.css">
   <link rel="stylesheet" href="css/style.css">
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="nouislider/nouislider.css">
   <title>Кекстаграм</title>
 </head>
 
@@ -76,35 +77,35 @@
                       </label>
                     </li>
                     <li class="effects__item">
-                      <input type="radio" class="effects__radio  visually-hidden" name="effect" id="effect-chrome" value="chrome">
+                      <input type="radio" class="effects__radio  visually-hidden" name="effect" id="effect-chrome" value="chrome" data-min="0" data-max="1" data-step="0.1">
                       <label for="effect-chrome" class="effects__label">
                         <span class="effects__preview  effects__preview--chrome">Превью эффекта Хром</span>
                         Хром
                       </label>
                     </li>
                     <li class="effects__item">
-                      <input type="radio" class="effects__radio  visually-hidden" name="effect" id="effect-sepia" value="sepia">
+                      <input type="radio" class="effects__radio  visually-hidden" name="effect" id="effect-sepia" value="sepia" data-min="0" data-max="1" data-step="0.1">
                       <label for="effect-sepia" class="effects__label">
                         <span class="effects__preview  effects__preview--sepia">Превью эффекта Сепия</span>
                         Сепия
                       </label>
                     </li>
                     <li class="effects__item">
-                      <input type="radio" class="effects__radio  visually-hidden" name="effect" id="effect-marvin" value="marvin">
+                      <input type="radio" class="effects__radio  visually-hidden" name="effect" id="effect-marvin" value="marvin" data-min="0" data-max="100" data-step="1">
                       <label for="effect-marvin" class="effects__label">
                         <span class="effects__preview  effects__preview--marvin">Превью эффекта Марвин</span>
                         Марвин
                       </label>
                     </li>
                     <li class="effects__item">
-                      <input type="radio" class="effects__radio  visually-hidden" name="effect" id="effect-phobos" value="phobos">
+                      <input type="radio" class="effects__radio  visually-hidden" name="effect" id="effect-phobos" value="phobos" data-min="0" data-max="3" data-step="0.1">
                       <label for="effect-phobos" class="effects__label">
                         <span class="effects__preview  effects__preview--phobos">Превью эффекта Фобос</span>
                         Фобос
                       </label>
                     </li>
                     <li class="effects__item">
-                      <input type="radio" class="effects__radio  visually-hidden" name="effect" id="effect-heat" value="heat">
+                      <input type="radio" class="effects__radio  visually-hidden" name="effect" id="effect-heat" value="heat" data-min="1" data-max="3" data-step="0.1">
                       <label for="effect-heat" class="effects__label">
                         <span class="effects__preview  effects__preview--heat">Превью эффекта Зной</span>
                         Зной
@@ -234,6 +235,7 @@
     <div class="img-upload__message  img-upload__message--loading">Загружаем...</div>
   </template>
 <script src="pristine/pristine.min.js" type="module"></script>
+<script src="nouislider/nouislider.js" type="module"></script>
 <script src="js/main.js" type="module"></script>
 </body>
 </html>
