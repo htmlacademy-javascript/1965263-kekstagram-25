@@ -4,12 +4,14 @@ import {renderFullsizePicture} from './render-fullsize-picture.js';
 import {showMoreComments} from './render-fullsize-picture.js';
 
 const data = fakeServerResponse();
-const picturesContainer = document.querySelector('.pictures');
-const closeBigPictureButton = document.querySelector('.big-picture__cancel');
+const thumbnailsContainerElement = document.querySelector('.pictures');
+const bigPictureElement = document.querySelector('.big-picture');
+const loadCommentsElement = document.querySelector('.comments-loader');
+const closeBigPictureElement = document.querySelector('.big-picture__cancel');
 
 renderThumbnails(data);
 
-const onCloseBigPictureButtonClick = () => {
+const onCloseBigPictureElementClick = () => {
   closeBigPicture();
 };
 
@@ -24,30 +26,28 @@ const onCommentsLoaderButtonClick = () => {
 };
 
 function closeBigPicture () {
-  document.querySelector('.big-picture').classList.add('hidden');
+  bigPictureElement.classList.add('hidden');
   document.body.classList.remove('modal-open');
-  const commentsLoader = document.querySelector('.comments-loader');
 
-  closeBigPictureButton.removeEventListener('click', onCloseBigPictureButtonClick);
+  closeBigPictureElement.removeEventListener('click', onCloseBigPictureElementClick);
   document.removeEventListener('keydown', onDocumentEscKeydown);
-  commentsLoader.removeEventListener('click', onCommentsLoaderButtonClick);
+  loadCommentsElement.removeEventListener('click', onCommentsLoaderButtonClick);
 }
 
 function openBigPicture (evt) {
-  const targetItem = evt.target.closest('a');
-  const itemCollection = picturesContainer.querySelectorAll('.picture');
-  const commentsLoader = document.querySelector('.comments-loader');
-  itemCollection.forEach((item, index) => {
-    if (item === targetItem) {
+  const thumbnailElements = thumbnailsContainerElement.querySelectorAll('.picture');
+  const targetElement = evt.target.closest('a');
+  thumbnailElements.forEach((item, index) => {
+    if (item === targetElement) {
       renderFullsizePicture(data[index]);
     }
   });
 
-  closeBigPictureButton.addEventListener('click', onCloseBigPictureButtonClick);
+  closeBigPictureElement.addEventListener('click', onCloseBigPictureElementClick);
   document.addEventListener('keydown', onDocumentEscKeydown);
-  commentsLoader.addEventListener('click', onCommentsLoaderButtonClick);
+  loadCommentsElement.addEventListener('click', onCommentsLoaderButtonClick);
 }
 
-picturesContainer.addEventListener('click', (evt) => {
+thumbnailsContainerElement.addEventListener('click', (evt) => {
   openBigPicture(evt);
 });

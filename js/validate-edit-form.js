@@ -1,9 +1,9 @@
 import {checkLine} from './util.js';
 
-const uploadForm = document.querySelector('.img-upload__form');
-const hashtagsInput = uploadForm.querySelector('.text__hashtags');
-const descriptionField = uploadForm.querySelector('.text__description');
-const pristine = new Pristine(uploadForm, {
+const uploadFormElement = document.querySelector('.img-upload__form');
+const hashtagsInputElement = uploadFormElement.querySelector('.text__hashtags');
+const descriptionFieldElement = uploadFormElement.querySelector('.text__description');
+const pristine = new Pristine(uploadFormElement, {
   classTo: 'text__wrapper',
   errorClass: 'img-upload__text--invalid',
   successClass: 'img-upload__text--valid',
@@ -19,14 +19,14 @@ const Hashtags = {
 
 
 function getErrorMessage (value) {
-  const HASHTAGS_ARRAY = value.split(Hashtags.SPLITTER);
-  const HASHTAGS_COUNT = HASHTAGS_ARRAY.length;
-  const REG_EXP_CHECK = HASHTAGS_ARRAY.every((item) => Hashtags.REG_EXP.test(item));
-  const REPEAT_HASHTAG_CHECK = HASHTAGS_ARRAY.every((item, index, array) => array.slice(index+1, array.length).every((elem) => elem !== item));
-  const HASHTAGS_COUNT_CHECK = HASHTAGS_COUNT <= Hashtags.MAX_COUNT;
-  if (HASHTAGS_COUNT_CHECK) {
-    if (!REG_EXP_CHECK) {return 'Формат хэштега "#хэштег" без пробелов и спецсимволов #, @, $';}
-    if (!REPEAT_HASHTAG_CHECK) {return 'Такой Хэштег уже есть';}
+  const hashTagsArray = value.split(Hashtags.SPLITTER);
+  const hashTagsCount = hashTagsArray.length;
+  const regExpCheck = hashTagsArray.every((item) => Hashtags.REG_EXP.test(item));
+  const repeatHashtagsCheck = hashTagsArray.every((item, index, array) => array.slice(index+1, array.length).every((elem) => elem !== item));
+  const hashtagsCountCheck = hashTagsCount <= Hashtags.MAX_COUNT;
+  if (hashtagsCountCheck) {
+    if (!regExpCheck) {return 'Формат хэштега "#хэштег" без пробелов и спецсимволов #, @, $';}
+    if (!repeatHashtagsCheck) {return 'Такой Хэштег уже есть';}
   }
   return 'Не более пяти Хэштегов';
 }
@@ -55,11 +55,10 @@ function validateUploadForm (evt) {
   }
 }
 
+pristine.addValidator(hashtagsInputElement, validateHashtags, getErrorMessage);
+pristine.addValidator(descriptionFieldElement, validateDescription, 'Не более 140 символов');
+
 export {validateUploadForm};
-export {uploadForm};
-export {hashtagsInput};
-export {descriptionField};
-export {pristine};
-export {validateHashtags};
-export {getErrorMessage};
-export {validateDescription};
+export {uploadFormElement};
+export {hashtagsInputElement};
+export {descriptionFieldElement};
