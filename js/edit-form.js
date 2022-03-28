@@ -29,6 +29,7 @@ const onDocumentEscKeydown = (evt) => {
   if (evt.key === 'Escape' && !isHashtagInputFocused && !isDescriptionFieldFocused) {
     closeEditForm();
   }
+  document.body.classList.add('modal-open');
 };
 
 const onUploadFormSubmit = (evt) => {
@@ -120,7 +121,10 @@ function closeEditForm () {
   const errorMessageElements = document.querySelectorAll('.img-upload__error');
   editingFormElement.classList.add('hidden');
   document.body.classList.remove('modal-open');
+
   uploadFileControlElement.value = '';
+  hashtagsInputElement.value = '';
+  descriptionFieldElement.value = '';
   errorMessageElements.forEach((item) => {item.textContent = '';});
   if (sliderElement.innerHTML !== '') {
     sliderElement.noUiSlider.destroy();

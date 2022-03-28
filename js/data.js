@@ -37,7 +37,7 @@ const LikesCount = {
 const POSTS_NUMBER = 25;
 
 const fakeServerResponse = () => Array.from({length: POSTS_NUMBER}, (item, index) => ({
-  id: index+1,
+  id: index,
   url: `photos/${index+1}.jpg`,
   description: descriptions[index],
   likes: getRandom(LikesCount.MIN, LikesCount.MAX),

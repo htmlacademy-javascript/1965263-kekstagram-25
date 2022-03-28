@@ -32,14 +32,14 @@ function getErrorMessage (value) {
 }
 
 function validateHashtags (value) {
-  const HASHTAGS_ARRAY = value.split(Hashtags.SPLITTER);
-  const HASHTAGS_COUNT = HASHTAGS_ARRAY.length;
+  const hashTagsArray = value.split(Hashtags.SPLITTER);
+  const hashTagsCount = hashTagsArray.length;
   if (value !== '') {
-    const REG_EXP_CHECK = HASHTAGS_ARRAY.every((item) => Hashtags.REG_EXP.test(item));
-    const REPEAT_HASHTAG_CHECK = HASHTAGS_ARRAY.every((item, index, array) => array.slice(index+1, array.length).every((elem) => elem !== item));
-    const HASHTAGS_COUNT_CHECK = HASHTAGS_COUNT <= Hashtags.MAX_COUNT;
+    const regExpCheck = hashTagsArray.every((item) => Hashtags.REG_EXP.test(item));
+    const repeatHashtagsCheck = hashTagsArray.every((item, index, array) => array.slice(index+1, array.length).every((elem) => elem !== item));
+    const hashtagsCountCheck = hashTagsCount <= Hashtags.MAX_COUNT;
 
-    return REG_EXP_CHECK && REPEAT_HASHTAG_CHECK && HASHTAGS_COUNT_CHECK;
+    return regExpCheck && repeatHashtagsCheck && hashtagsCountCheck;
   }
   return true;
 }
