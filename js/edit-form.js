@@ -1,3 +1,4 @@
+import {sendData} from './api.js';
 import {validateUploadForm} from './validate-edit-form.js';
 import {uploadFormElement} from './validate-edit-form.js';
 import {hashtagsInputElement} from './validate-edit-form.js';
@@ -14,6 +15,7 @@ const closeEditFormElement = editingFormElement.querySelector('.img-upload__canc
 const scaleSmallerElement = editingFormElement.querySelector('.scale__control--smaller');
 const scaleBiggerElement = editingFormElement.querySelector('.scale__control--bigger');
 const scaleControlValueElement = editingFormElement.querySelector('.scale__control--value');
+const submitButtonElement = editingFormElement.querySelector('.img-upload__submit');
 const MIN_SCALE_VALUE = 0;
 const MAX_SCALE_VALUE = 100;
 const SCALE_STEP_VALUE = 25;
@@ -32,7 +34,12 @@ const onDocumentEscKeydown = (evt) => {
 };
 
 const onUploadFormSubmit = (evt) => {
-  validateUploadForm(evt);
+  evt.preventDefault();
+  if (validateUploadForm()) {
+    submitButtonElement.disabled = true;
+    const body = new FormData(evt.target);
+    sendData(body);
+  }
 };
 
 const onScaleSmallerElementClick = () => {
@@ -160,3 +167,5 @@ const onUploadFileClick = () => {
 };
 
 uploadFileControlElement.addEventListener('change', onUploadFileClick);
+
+export {closeEditForm, submitButtonElement};

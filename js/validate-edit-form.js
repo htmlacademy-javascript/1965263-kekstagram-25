@@ -49,10 +49,8 @@ function validateDescription (value) {
   return value !== '' ? checkLine(value, MAX_LENGTH) : true;
 }
 
-function validateUploadForm (evt) {
-  if (!pristine.validate()) {
-    evt.preventDefault();
-  }
+function validateUploadForm () {
+  return pristine.validate();
 }
 
 pristine.addValidator(hashtagsInputElement, validateHashtags, getErrorMessage);

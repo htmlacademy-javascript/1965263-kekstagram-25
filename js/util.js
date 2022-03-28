@@ -34,6 +34,8 @@ const NamesCount = {
   MAX: 9
 };
 
+const ALERT_SHOW_TIME = 3000;
+
 function getRandom (min, max) {
   [min, max]=[Math.abs(min), Math.abs(max)];
   if (max < min) {[min, max]=[max, min];}
@@ -66,6 +68,41 @@ function createComments () {
   return comments;
 }
 
+function showMessage (message, color) {
+  const alertContainerElement = document.createElement('div');
+  const alertElement = document.createElement('div');
+  alertContainerElement.style.cssText = `display: flex;
+                                         position: fixed;
+                                         top: 0;
+                                         left: 0;
+                                         margin: 0;
+                                         padding: 0;
+                                         width: 100%;
+                                         height: 100%;
+                                         background-color: rgba(0, 0, 0, 0.5);
+                                         z-index: 10;`;
+  alertElement.style.cssText = `margin: 0 auto;
+                                align-self: center;
+                                width: 350px;
+                                height: 50px;
+                                font-size: 18px;
+                                font-weight: 800;
+                                line-height: 50px;
+                                border-radius: 10px;
+                                text-align: center;
+                                opacity: 0.7;
+                                color: black;
+                                background-color: ${color};`;
+  alertElement.textContent = message;
+  alertContainerElement.append(alertElement);
+  document.body.append(alertContainerElement);
+
+  setTimeout(() => {
+    alertContainerElement.remove();
+  }, ALERT_SHOW_TIME);
+}
+
 export {getRandom};
 export {createComments};
 export {checkLine};
+export {showMessage};
