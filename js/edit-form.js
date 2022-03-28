@@ -29,7 +29,6 @@ const onDocumentEscKeydown = (evt) => {
   if (evt.key === 'Escape' && !isHashtagInputFocused && !isDescriptionFieldFocused) {
     closeEditForm();
   }
-  document.body.classList.add('modal-open');
 };
 
 const onUploadFormSubmit = (evt) => {

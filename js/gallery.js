@@ -1,15 +1,15 @@
-import {fakeServerResponse} from './data.js';
-import {renderThumbnails} from './render-thumbnails.js';
+//import {fakeServerResponse} from './data.js';
+//import {renderThumbnails} from './render-thumbnails.js';
 import {renderFullsizePicture} from './render-fullsize-picture.js';
 import {showMoreComments} from './render-fullsize-picture.js';
 
-const data = fakeServerResponse();
+//const data = fakeServerResponse();
 const thumbnailsContainerElement = document.querySelector('.pictures');
 const bigPictureElement = document.querySelector('.big-picture');
 const loadCommentsElement = document.querySelector('.comments-loader');
 const closeBigPictureElement = document.querySelector('.big-picture__cancel');
 
-renderThumbnails(data);
+//renderThumbnails(data);
 
 const onCloseBigPictureElementClick = () => {
   closeBigPicture();
@@ -34,7 +34,7 @@ function closeBigPicture () {
   loadCommentsElement.removeEventListener('click', onCommentsLoaderButtonClick);
 }
 
-function openBigPicture (evt) {
+function openBigPicture (evt, data) {
   const thumbnailElements = thumbnailsContainerElement.querySelectorAll('.picture');
   const targetElement = evt.target.closest('a');
   thumbnailElements.forEach((item, index) => {
@@ -48,6 +48,8 @@ function openBigPicture (evt) {
   loadCommentsElement.addEventListener('click', onCommentsLoaderButtonClick);
 }
 
-thumbnailsContainerElement.addEventListener('click', (evt) => {
+/* thumbnailsContainerElement.addEventListener('click', (evt) => {
   openBigPicture(evt);
-});
+}); */
+
+export {openBigPicture};
