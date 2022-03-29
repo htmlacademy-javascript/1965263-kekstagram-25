@@ -34,15 +34,20 @@ const NamesCount = {
   MAX: 9
 };
 
-const ALERT_SHOW_TIME = 3000;
+const successMessageTemplate = document.querySelector('#success').content.querySelector('.success');
+const successMessageElement = successMessageTemplate.cloneNode(true);
+const closeSuccessMessageElement = successMessageElement.querySelector('.success__button');
+const errorMessageTemplate = document.querySelector('#error').content.querySelector('.error');
+const errorMessageElement = errorMessageTemplate.cloneNode(true);
+const closeErrorMessageElement = errorMessageElement.querySelector('.error__button');
+
+const checkLine = (line, maxLength) => line.length <= maxLength;
 
 function getRandom (min, max) {
   [min, max]=[Math.abs(min), Math.abs(max)];
   if (max < min) {[min, max]=[max, min];}
   return Math.round(min + (max - min) * Math.random());
 }
-
-const checkLine = (line, maxLength) => line.length <= maxLength;
 
 const commentsId = [];              // массив для хранения уникальных id для комментариев
 function getCommentId () {
@@ -68,7 +73,8 @@ function createComments () {
   return comments;
 }
 
-function showMessage (message, color) {
+function showLoadFailMessage () {
+  const ALERT_SHOW_TIME = 3000;
   const alertContainerElement = document.createElement('div');
   const alertElement = document.createElement('div');
   alertContainerElement.style.cssText = `display: flex;
@@ -92,8 +98,8 @@ function showMessage (message, color) {
                                 text-align: center;
                                 opacity: 0.7;
                                 color: black;
-                                background-color: ${color};`;
-  alertElement.textContent = message;
+                                background-color: greenyellow;`;
+  alertElement.textContent = 'Ошибка загрузки данных';
   alertContainerElement.append(alertElement);
   document.body.append(alertContainerElement);
 
@@ -102,7 +108,28 @@ function showMessage (message, color) {
   }, ALERT_SHOW_TIME);
 }
 
-export {getRandom};
-export {createComments};
-export {checkLine};
-export {showMessage};
+const onCloseSuccessMessageElement = () => {
+  successMessageElement.remove();
+};
+
+const onCloseErrorMessageElement = () => {
+  errorMessageElement.remove();
+};
+
+function showMessage (messageType) {
+  switch (messageType) {
+    case 'success':
+      document.body.append(successMessageElement);
+      closeSuccessMessageElement.addEventListener('click', onCloseSuccessMessageElement);
+      break;
+    case 'error':
+      document.body.append(errorMessageElement);
+      closeErrorMessageElement.addEventListener('click', onCloseErrorMessageElement);
+      break;
+    case 'loadError':
+      showLoadFailMessage();
+      break;
+  }
+}
+
+export {getRandom, createComments, checkLine, showMessage};

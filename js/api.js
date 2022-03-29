@@ -4,7 +4,10 @@ import {closeEditForm, submitButtonElement} from './edit-form.js';
 function getData (fn) {
   fetch('https://25.javascript.pages.academy/kekstagram/data')
     .then((res) => res.json())
-    .then((data) => fn(data));
+    .then((data) => fn(data))
+    .catch(() => {
+      showMessage('loadError');
+    });
 }
 
 function sendData (body) {
@@ -16,14 +19,13 @@ function sendData (body) {
       if (res.ok) {
         submitButtonElement.disabled = false;
         closeEditForm();
-        showMessage('Данные успешно отправлены', 'greenyellow');
-        console.log(res);
+        showMessage('success');
       } else {
         closeEditForm();
-        showMessage('Ошибка отправки данных', 'red');
+        showMessage('error');
       }
     })
-    .catch(() => showMessage('Ошибка отправки данных', 'red'));
+    .catch(() => showMessage('error'));
 }
 
 export {getData, sendData};

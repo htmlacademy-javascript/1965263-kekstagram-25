@@ -52,4 +52,4 @@ function openBigPicture (evt, data) {
   openBigPicture(evt);
 }); */
 
-export {openBigPicture};
+export {openBigPicture, thumbnailsContainerElement};
