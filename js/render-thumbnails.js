@@ -1,5 +1,7 @@
+import {openBigPicture} from './gallery.js';
+
 function renderThumbnails(data) {
-  const thumbnailsContainer = document.querySelector('.pictures');
+  const thumbnailsContainerElement = document.querySelector('.pictures');
   const thumbnailTemplate = document.querySelector('#picture').content.querySelector('.picture');
   const tempContainer = document.createDocumentFragment();
 
@@ -17,7 +19,11 @@ function renderThumbnails(data) {
     tempContainer.append(thumbnailItem);
   });
 
-  thumbnailsContainer.append(tempContainer);
+  thumbnailsContainerElement.append(tempContainer);
+
+  thumbnailsContainerElement.addEventListener('click', (evt) => {
+    openBigPicture(evt, data);
+  });
 }
 
 export {renderThumbnails};
