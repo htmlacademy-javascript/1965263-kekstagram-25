@@ -132,4 +132,12 @@ function showMessage (messageType) {
   }
 }
 
-export {getRandom, createComments, checkLine, showMessage};
+const debounce = (callback, delay) => {
+  let timeoutId;
+  return function () {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => callback.apply(this, arguments), delay);
+  };
+};
+
+export {getRandom, createComments, checkLine, showMessage, debounce};
