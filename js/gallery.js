@@ -1,5 +1,4 @@
-import {renderFullsizePicture} from './render-fullsize-picture.js';
-import {showMoreComments} from './render-fullsize-picture.js';
+import {renderFullsizePicture, showMoreComments} from './render-fullsize-picture.js';
 
 const thumbnailsContainerElement = document.querySelector('.pictures');
 const bigPictureElement = document.querySelector('.big-picture');

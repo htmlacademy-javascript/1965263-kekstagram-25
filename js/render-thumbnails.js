@@ -1,6 +1,6 @@
 import {openBigPicture} from './gallery.js';
 
-function renderThumbnails(data) {
+function renderThumbnails (data) {
   const thumbnailsContainerElement = document.querySelector('.pictures');
   const thumbnailTemplate = document.querySelector('#picture').content.querySelector('.picture');
   const tempContainer = document.createDocumentFragment();

@@ -37,8 +37,8 @@ const onUploadFormSubmit = (evt) => {
   evt.preventDefault();
   if (validateUploadForm()) {
     submitButtonElement.disabled = true;
-    const body = new FormData(evt.target);
-    sendData(body);
+    const requestBody = new FormData(evt.target);
+    sendData(requestBody);
   }
 };
 
