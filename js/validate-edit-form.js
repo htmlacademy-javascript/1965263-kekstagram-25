@@ -22,7 +22,7 @@ function getErrorMessage (value) {
   const hashTagsArray = value.split(Hashtags.SPLITTER);
   const hashTagsCount = hashTagsArray.length;
   const regExpCheck = hashTagsArray.every((item) => Hashtags.REG_EXP.test(item));
-  const repeatHashtagsCheck = hashTagsArray.every((item, index, array) => array.slice(index++, array.length).every((elem) => elem !== item));
+  const repeatHashtagsCheck = hashTagsArray.every((item, index, array) => array.slice(index+1, array.length).every((elem) => elem !== item));
   const hashtagsCountCheck = hashTagsCount <= Hashtags.MAX_COUNT;
   if (hashtagsCountCheck) {
     if (!regExpCheck) {return 'Формат хэштега "#хэштег" без пробелов и спецсимволов #, @, $';}
