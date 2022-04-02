@@ -76,5 +76,4 @@ function renderFullsizePicture (data) {
   document.body.classList.add('modal-open');
 }
 
-export {renderFullsizePicture};
-export {showMoreComments};
+export {renderFullsizePicture, showMoreComments};

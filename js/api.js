@@ -1,10 +1,10 @@
 import {showMessage} from './util.js';
 import {closeEditForm, submitButtonElement} from './edit-form.js';
 
-function getData (fn) {
+function getData (callback) {
   fetch('https://25.javascript.pages.academy/kekstagram/data')
     .then((res) => res.json())
-    .then((data) => fn(data))
+    .then((data) => callback(data))
     .catch(() => {
       showMessage('loadError');
     });

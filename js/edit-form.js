@@ -37,8 +37,8 @@ const onUploadFormSubmit = (evt) => {
   evt.preventDefault();
   if (validateUploadForm()) {
     submitButtonElement.disabled = true;
-    const body = new FormData(evt.target);
-    sendData(body);
+    const requestBody = new FormData(evt.target);
+    sendData(requestBody);
   }
 };
 
@@ -145,14 +145,23 @@ function closeEditForm () {
 }
 
 function openEditForm () {
-  editingFormElement.classList.remove('hidden');
-  document.body.classList.add('modal-open');
+  const file = uploadFileControlElement.files[0];
+  const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
+
+  const fileName = file.name.toLowerCase();
+  const matches = FILE_TYPES.some((item) => fileName.endsWith(item));
+  if (matches) {
+    imageElement.src = URL.createObjectURL(file);
+  }
 
   scaleControlValue = MAX_SCALE_VALUE;
   scaleControlValueElement.value = `${scaleControlValue}%`;
   imageElement.style.transform = 'scale(1)';
   imageElement.style.filter = 'none';
   effectElements[0].checked = true;
+
+  editingFormElement.classList.remove('hidden');
+  document.body.classList.add('modal-open');
 
   closeEditFormElement.addEventListener('click', onCloseEditFormElementClick);
   document.addEventListener('keydown', onDocumentEscKeydown);

@@ -10,7 +10,7 @@ const RandomPictures = {
   MAX_COUNT: 10
 };
 
-function applyFilterOption(pickedElementsSet) {
+function applyFilterOption (pickedElementsSet) {
   const thumbnailElements = thumbnailsContainerElement.querySelectorAll('.picture');
   thumbnailElements.forEach((item) => thumbnailsContainerElement.removeChild(item));
   renderThumbnails(pickedElementsSet);
@@ -18,10 +18,10 @@ function applyFilterOption(pickedElementsSet) {
 
 const filterOption = debounce(applyFilterOption, RERENDER_DELAY);
 
-function filterPictures(evt, data) {
+function filterPictures (evt, data) {
   const filterOptionElements = filtersContainerElement.querySelectorAll('.img-filters__button');
   const discussedPictureElements = data.slice().sort((nextItem, currentItem) => currentItem.comments.length - nextItem.comments.length);
-  const randomPictureElements = data.slice().sort((a) => a.id - getRandom(RandomPictures.MIN_ID, RandomPictures.MAX_ID)).slice(RandomPictures.MIN_ID, RandomPictures.MAX_COUNT);
+  const randomPictureElements = data.slice().sort((item) => item.id - getRandom(RandomPictures.MIN_ID, RandomPictures.MAX_ID)).slice(RandomPictures.MIN_ID, RandomPictures.MAX_COUNT);
   const target = evt.target.closest('.img-filters__button');
   const targetId = target.id;
 

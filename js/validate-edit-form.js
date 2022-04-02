@@ -56,7 +56,4 @@ function validateUploadForm () {
 pristine.addValidator(hashtagsInputElement, validateHashtags, getErrorMessage);
 pristine.addValidator(descriptionFieldElement, validateDescription, 'Не более 140 символов');
 
-export {validateUploadForm};
-export {uploadFormElement};
-export {hashtagsInputElement};
-export {descriptionFieldElement};
+export {validateUploadForm,uploadFormElement, hashtagsInputElement, descriptionFieldElement};
