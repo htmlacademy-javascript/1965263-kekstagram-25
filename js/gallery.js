@@ -29,8 +29,9 @@ function closeBigPicture () {
 }
 
 function openBigPicture (evt, data) {
+  if (!evt.target.classList.contains('picture__img')) {return;}
   const thumbnailElements = thumbnailsContainerElement.querySelectorAll('.picture');
-  const targetElement = evt.target.closest('a');
+  const targetElement = evt.target.closest('.picture');
   thumbnailElements.forEach((item, index) => {
     if (item === targetElement) {
       renderFullsizePicture(data[index]);

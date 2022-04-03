@@ -2,8 +2,8 @@ import {openBigPicture} from './gallery.js';
 
 function renderThumbnails (data) {
   const thumbnailsContainerElement = document.querySelector('.pictures');
-  const thumbnailTemplate = document.querySelector('#picture').content.querySelector('.picture');
-  const tempContainer = document.createDocumentFragment();
+  const thumbnailTemplateElement = document.querySelector('#picture').content.querySelector('.picture');
+  const fragment = document.createDocumentFragment();
 
   data.forEach((item) => {
     const PictureInfo = {
@@ -11,15 +11,15 @@ function renderThumbnails (data) {
       LIKES: item.likes,
       COMMENTS: item.comments.length
     };
-    const thumbnailItem = thumbnailTemplate.cloneNode(true);
+    const thumbnaiElement = thumbnailTemplateElement.cloneNode(true);
 
-    thumbnailItem.querySelector('.picture__img').src = PictureInfo.URL;
-    thumbnailItem.querySelector('.picture__likes').textContent = PictureInfo.LIKES;
-    thumbnailItem.querySelector('.picture__comments').textContent = PictureInfo.COMMENTS;
-    tempContainer.append(thumbnailItem);
+    thumbnaiElement.querySelector('.picture__img').src = PictureInfo.URL;
+    thumbnaiElement.querySelector('.picture__likes').textContent = PictureInfo.LIKES;
+    thumbnaiElement.querySelector('.picture__comments').textContent = PictureInfo.COMMENTS;
+    fragment.append(thumbnaiElement);
   });
 
-  thumbnailsContainerElement.append(tempContainer);
+  thumbnailsContainerElement.append(fragment);
 
   thumbnailsContainerElement.addEventListener('click', (evt) => {
     openBigPicture(evt, data);
