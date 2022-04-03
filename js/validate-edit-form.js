@@ -3,7 +3,7 @@ import {checkLine} from './util.js';
 const uploadFormElement = document.querySelector('.img-upload__form');
 const hashtagsInputElement = uploadFormElement.querySelector('.text__hashtags');
 const descriptionFieldElement = uploadFormElement.querySelector('.text__description');
-const pristine = new Pristine(uploadFormElement, {
+const pristine = window.Pristine(uploadFormElement, {
   classTo: 'text__wrapper',
   errorClass: 'img-upload__text--invalid',
   successClass: 'img-upload__text--valid',
