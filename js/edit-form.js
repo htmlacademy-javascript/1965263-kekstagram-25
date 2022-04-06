@@ -16,10 +16,14 @@ const scaleSmallerElement = editingFormElement.querySelector('.scale__control--s
 const scaleBiggerElement = editingFormElement.querySelector('.scale__control--bigger');
 const scaleControlValueElement = editingFormElement.querySelector('.scale__control--value');
 const submitButtonElement = editingFormElement.querySelector('.img-upload__submit');
-const MIN_SCALE_VALUE = 0;
-const MAX_SCALE_VALUE = 100;
-const SCALE_STEP_VALUE = 25;
-let scaleControlValue = MAX_SCALE_VALUE;
+const Scale = {
+  MIN: 0,
+  MAX: 100,
+  STEP: 25
+};
+const QUOTIENT = 100;
+let scaleControlValue = Scale.MAX;
+const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
 
 const onCloseEditFormElementClick = () => {
   closeEditForm();
@@ -36,19 +40,19 @@ const onDocumentEscKeydown = (evt) => {
 const onUploadFormSubmit = (evt) => {
   evt.preventDefault();
   if (validateUploadForm()) {
-    submitButtonElement.disabled = true;
+    submitButtonElement.setAttribute('disabled', true);
     const requestBody = new FormData(evt.target);
     sendData(requestBody);
   }
 };
 
 const onScaleSmallerElementClick = () => {
-  const scaleValue = scaleControlValue > MIN_SCALE_VALUE ? scaleControlValue -= SCALE_STEP_VALUE : scaleControlValue;
+  const scaleValue = scaleControlValue > Scale.MIN ? scaleControlValue -= Scale.STEP : scaleControlValue;
   changeScale(scaleValue);
 };
 
 const onScaleBiggerElementClick = () => {
-  const scaleValue = scaleControlValue < MAX_SCALE_VALUE ? scaleControlValue += SCALE_STEP_VALUE : scaleControlValue;
+  const scaleValue = scaleControlValue < Scale.MAX ? scaleControlValue += Scale.STEP : scaleControlValue;
   changeScale(scaleValue);
 };
 
@@ -61,7 +65,6 @@ const onSliderUpdate = () => {
 };
 
 function changeScale (scaleValue) {
-  const QUOTIENT = 100;
   scaleControlValueElement.value = `${scaleValue}%`;
   imageElement.style.transform = `scale(${scaleValue/QUOTIENT})`;
 }
@@ -81,7 +84,7 @@ function createSlider (evt) {
 }
 
 function changeEffect (evt) {
-  const Effects = {
+  const effects = {
     'chrome': 'grayscale(1)',
     'sepia': 'sepia(1)',
     'marvin': 'invert(100%)',
@@ -102,12 +105,12 @@ function changeEffect (evt) {
       step: Number(evt.target.dataset.step),
     });
   } else {sliderElement.noUiSlider.destroy();}
-  imageElement.style.filter = Effects[evt.target.value];
+  imageElement.style.filter = effects[evt.target.value];
 }
 
 function applyEffect () {
   const SLIDER_VALUE = sliderElement.noUiSlider.get();
-  const Effects = {
+  const effects = {
     'chrome': `grayscale(${SLIDER_VALUE})`,
     'sepia': `sepia(${SLIDER_VALUE})`,
     'marvin': `invert(${SLIDER_VALUE}%)`,
@@ -118,7 +121,7 @@ function applyEffect () {
   hiddenSliderValueElement.value = SLIDER_VALUE;
   effectElements.forEach((item) => {
     if (item.checked) {
-      imageElement.style.filter = Effects[item.value];
+      imageElement.style.filter = effects[item.value];
     }
   });
 }
@@ -146,7 +149,6 @@ function closeEditForm () {
 
 function openEditForm () {
   const file = uploadFileControlElement.files[0];
-  const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
 
   const fileName = file.name.toLowerCase();
   const matches = FILE_TYPES.some((item) => fileName.endsWith(item));
@@ -154,7 +156,7 @@ function openEditForm () {
     imageElement.src = URL.createObjectURL(file);
   }
 
-  scaleControlValue = MAX_SCALE_VALUE;
+  scaleControlValue = Scale.MAX;
   scaleControlValueElement.value = `${scaleControlValue}%`;
   imageElement.style.transform = 'scale(1)';
   imageElement.style.filter = 'none';

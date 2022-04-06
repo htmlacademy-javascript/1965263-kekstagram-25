@@ -9,6 +9,10 @@ const RandomPictures = {
   MAX_ID: 24,
   MAX_COUNT: 10
 };
+const FilterOption = {
+  RANDOM: 'filter-random',
+  DISCUSSED: 'filter-discussed'
+};
 
 function applyFilterOption (pickedElementsSet) {
   const thumbnailElements = thumbnailsContainerElement.querySelectorAll('.picture');
@@ -29,10 +33,10 @@ function filterPictures (evt, data) {
   target.classList.add('img-filters__button--active');
 
   switch (targetId) {
-    case 'filter-random':
+    case FilterOption.RANDOM:
       filterOption(randomPictureElements);
       break;
-    case 'filter-discussed':
+    case FilterOption.DISCUSSED:
       filterOption(discussedPictureElements);
       break;
     default:

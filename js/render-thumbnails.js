@@ -1,21 +1,22 @@
 import {openBigPicture} from './gallery.js';
 
+const thumbnailsContainerElement = document.querySelector('.pictures');
+const thumbnailTemplateElement = document.querySelector('#picture').content.querySelector('.picture');
+
 function renderThumbnails (data) {
-  const thumbnailsContainerElement = document.querySelector('.pictures');
-  const thumbnailTemplateElement = document.querySelector('#picture').content.querySelector('.picture');
   const fragment = document.createDocumentFragment();
 
   data.forEach((item) => {
-    const PictureInfo = {
-      URL: item.url,
-      LIKES: item.likes,
-      COMMENTS: item.comments.length
+    const pictureData = {
+      url: item.url,
+      likes: item.likes,
+      comments: item.comments.length
     };
     const thumbnaiElement = thumbnailTemplateElement.cloneNode(true);
 
-    thumbnaiElement.querySelector('.picture__img').src = PictureInfo.URL;
-    thumbnaiElement.querySelector('.picture__likes').textContent = PictureInfo.LIKES;
-    thumbnaiElement.querySelector('.picture__comments').textContent = PictureInfo.COMMENTS;
+    thumbnaiElement.querySelector('.picture__img').src = pictureData.url;
+    thumbnaiElement.querySelector('.picture__likes').textContent = pictureData.likes;
+    thumbnaiElement.querySelector('.picture__comments').textContent = pictureData.comments;
     fragment.append(thumbnaiElement);
   });
 
