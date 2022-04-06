@@ -4,6 +4,12 @@ const closeSuccessMessageElement = successMessageElement.querySelector('.success
 const errorMessageTemplate = document.querySelector('#error').content.querySelector('.error');
 const errorMessageElement = errorMessageTemplate.cloneNode(true);
 const closeErrorMessageElement = errorMessageElement.querySelector('.error__button');
+const MessageType = {
+  SUCCESS: 'success',
+  ERROR: 'error',
+  LOAD_ERROR: 'loadError'
+};
+const ALERT_SHOW_TIME = 3000;
 
 const checkLine = (line, maxLength) => line.length <= maxLength;
 
@@ -14,31 +20,10 @@ function getRandom (min, max) {
 }
 
 function showLoadFailMessage () {
-  const ALERT_SHOW_TIME = 3000;
   const alertContainerElement = document.createElement('div');
+  alertContainerElement.classList.add('alert__container');
   const alertElement = document.createElement('div');
-  alertContainerElement.style.cssText = `display: flex;
-                                         position: fixed;
-                                         top: 0;
-                                         left: 0;
-                                         margin: 0;
-                                         padding: 0;
-                                         width: 100%;
-                                         height: 100%;
-                                         background-color: rgba(0, 0, 0, 0.5);
-                                         z-index: 10;`;
-  alertElement.style.cssText = `margin: 0 auto;
-                                align-self: center;
-                                width: 350px;
-                                height: 50px;
-                                font-size: 18px;
-                                font-weight: 800;
-                                line-height: 50px;
-                                border-radius: 10px;
-                                text-align: center;
-                                opacity: 0.7;
-                                color: black;
-                                background-color: greenyellow;`;
+  alertElement.classList.add('alert__message');
   alertElement.textContent = 'Ошибка загрузки данных';
   alertContainerElement.append(alertElement);
   document.body.append(alertContainerElement);
@@ -58,15 +43,15 @@ const onCloseErrorMessageElement = () => {
 
 function showMessage (messageType) {
   switch (messageType) {
-    case 'success':
+    case MessageType.SUCCESS:
       document.body.append(successMessageElement);
       closeSuccessMessageElement.addEventListener('click', onCloseSuccessMessageElement);
       break;
-    case 'error':
+    case MessageType.ERROR:
       document.body.append(errorMessageElement);
       closeErrorMessageElement.addEventListener('click', onCloseErrorMessageElement);
       break;
-    case 'loadError':
+    case MessageType.LOAD_ERROR:
       showLoadFailMessage();
       break;
   }
@@ -80,4 +65,4 @@ const debounce = (callback, delay) => {
   };
 };
 
-export {getRandom, checkLine, showMessage, debounce};
+export {getRandom, checkLine, showMessage, MessageType, debounce};

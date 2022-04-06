@@ -1,31 +1,32 @@
-import {showMessage} from './util.js';
+import {showMessage, MessageType} from './util.js';
 import {closeEditForm, submitButtonElement} from './edit-form.js';
 
+const URL = 'https://25.javascript.pages.academy/kekstagram';
+
 function getData (callback) {
-  fetch('https://25.javascript.pages.academy/kekstagram/data')
+  fetch(`${URL}/data`)
     .then((res) => res.json())
     .then((data) => callback(data))
     .catch(() => {
-      showMessage('loadError');
+      showMessage(MessageType.LOAD_ERROR);
     });
 }
 
 function sendData (body) {
-  fetch('https://25.javascript.pages.academy/kekstagram', {
+  fetch(URL, {
     method: 'POST',
     body
   })
+    .finally(() => closeEditForm())
     .then((res) => {
       if (res.ok) {
-        submitButtonElement.disabled = false;
-        closeEditForm();
-        showMessage('success');
+        submitButtonElement.setAttribute('disabled', false);
+        showMessage(MessageType.SUCCESS);
       } else {
-        closeEditForm();
-        showMessage('error');
+        showMessage(MessageType.ERROR);
       }
     })
-    .catch(() => showMessage('error'));
+    .catch(() => showMessage(MessageType.ERROR));
 }
 
 export {getData, sendData};

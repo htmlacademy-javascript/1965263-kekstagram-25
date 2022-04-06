@@ -16,6 +16,7 @@ const Hashtags = {
   MAX_COUNT: 5,
   REG_EXP: /^#[A-Za-zА-Яа-яЁё0-9]{1,19}$/
 };
+const MAX_LENGTH = 140;
 
 
 function getErrorMessage (value) {
@@ -45,7 +46,6 @@ function validateHashtags (value) {
 }
 
 function validateDescription (value) {
-  const MAX_LENGTH = 140;
   return value !== '' ? checkLine(value, MAX_LENGTH) : true;
 }
 
@@ -54,6 +54,6 @@ function validateUploadForm () {
 }
 
 pristine.addValidator(hashtagsInputElement, validateHashtags, getErrorMessage);
-pristine.addValidator(descriptionFieldElement, validateDescription, 'Не более 140 символов');
+pristine.addValidator(descriptionFieldElement, validateDescription, `Не более ${MAX_LENGTH} символов`);
 
 export {validateUploadForm,uploadFormElement, hashtagsInputElement, descriptionFieldElement};
