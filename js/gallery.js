@@ -1,4 +1,4 @@
-import {renderFullsizePicture, showMoreComments} from './render-fullsize-picture.js';
+import {renderFullSizePicture, showMoreComments} from './render-fullsize-picture.js';
 
 const thumbnailsContainerElement = document.querySelector('.pictures');
 const bigPictureElement = document.querySelector('.big-picture');
@@ -34,7 +34,7 @@ function openBigPicture (evt, data) {
   const targetElement = evt.target.closest('.picture');
   thumbnailElements.forEach((item, index) => {
     if (item === targetElement) {
-      renderFullsizePicture(data[index]);
+      renderFullSizePicture(data[index]);
     }
   });
 

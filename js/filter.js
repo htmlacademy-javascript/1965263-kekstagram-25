@@ -2,7 +2,6 @@ import {thumbnailsContainerElement} from './gallery.js';
 import {getRandom, debounce} from './util.js';
 import {renderThumbnails} from './render-thumbnails.js';
 
-const filtersContainerElement = document.querySelector('.img-filters');
 const RERENDER_DELAY = 500;
 const RandomPictures = {
   MIN_ID: 0,
@@ -13,6 +12,8 @@ const FilterOption = {
   RANDOM: 'filter-random',
   DISCUSSED: 'filter-discussed'
 };
+
+const filtersContainerElement = document.querySelector('.img-filters');
 
 function applyFilterOption (pickedElementsSet) {
   const thumbnailElements = thumbnailsContainerElement.querySelectorAll('.picture');

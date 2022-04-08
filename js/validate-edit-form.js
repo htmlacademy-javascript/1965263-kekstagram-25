@@ -1,5 +1,12 @@
 import {checkLine} from './util.js';
 
+const Hashtags = {
+  SPLITTER: ' ',
+  MAX_COUNT: 5,
+  REG_EXP: /^#[A-Za-zА-Яа-яЁё0-9]{1,19}$/
+};
+const MAX_LENGTH = 140;
+
 const uploadFormElement = document.querySelector('.img-upload__form');
 const hashtagsInputElement = uploadFormElement.querySelector('.text__hashtags');
 const descriptionFieldElement = uploadFormElement.querySelector('.text__description');
@@ -11,13 +18,6 @@ const pristine = window.Pristine(uploadFormElement, {
   errorTextTag: 'div',
   errorTextClass: 'img-upload__error'
 });
-const Hashtags = {
-  SPLITTER: ' ',
-  MAX_COUNT: 5,
-  REG_EXP: /^#[A-Za-zА-Яа-яЁё0-9]{1,19}$/
-};
-const MAX_LENGTH = 140;
-
 
 function getErrorMessage (value) {
   const hashTagsArray = value.split(Hashtags.SPLITTER);
