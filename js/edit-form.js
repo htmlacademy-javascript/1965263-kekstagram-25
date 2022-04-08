@@ -4,6 +4,15 @@ import {uploadFormElement} from './validate-edit-form.js';
 import {hashtagsInputElement} from './validate-edit-form.js';
 import {descriptionFieldElement} from './validate-edit-form.js';
 
+const Scale = {
+  MIN: 0,
+  MAX: 100,
+  STEP: 25
+};
+const QUOTIENT = 100;
+const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
+let scaleControlValue = Scale.MAX;
+
 const uploadFileControlElement = document.querySelector('#upload-file');
 const editingFormElement = uploadFormElement.querySelector('.img-upload__overlay');
 const imageElement = uploadFormElement.querySelector('.img-upload__preview').querySelector('img');
@@ -16,14 +25,6 @@ const scaleSmallerElement = editingFormElement.querySelector('.scale__control--s
 const scaleBiggerElement = editingFormElement.querySelector('.scale__control--bigger');
 const scaleControlValueElement = editingFormElement.querySelector('.scale__control--value');
 const submitButtonElement = editingFormElement.querySelector('.img-upload__submit');
-const Scale = {
-  MIN: 0,
-  MAX: 100,
-  STEP: 25
-};
-const QUOTIENT = 100;
-let scaleControlValue = Scale.MAX;
-const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
 
 const onCloseEditFormElementClick = () => {
   closeEditForm();

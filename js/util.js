@@ -1,9 +1,3 @@
-const successMessageTemplate = document.querySelector('#success').content.querySelector('.success');
-const successMessageElement = successMessageTemplate.cloneNode(true);
-const closeSuccessMessageElement = successMessageElement.querySelector('.success__button');
-const errorMessageTemplate = document.querySelector('#error').content.querySelector('.error');
-const errorMessageElement = errorMessageTemplate.cloneNode(true);
-const closeErrorMessageElement = errorMessageElement.querySelector('.error__button');
 const MessageType = {
   SUCCESS: 'success',
   ERROR: 'error',
@@ -11,7 +5,16 @@ const MessageType = {
 };
 const ALERT_SHOW_TIME = 3000;
 
-const checkLine = (line, maxLength) => line.length <= maxLength;
+const successMessageTemplate = document.querySelector('#success').content.querySelector('.success');
+const successMessageElement = successMessageTemplate.cloneNode(true);
+const closeSuccessMessageElement = successMessageElement.querySelector('.success__button');
+const errorMessageTemplate = document.querySelector('#error').content.querySelector('.error');
+const errorMessageElement = errorMessageTemplate.cloneNode(true);
+const closeErrorMessageElement = errorMessageElement.querySelector('.error__button');
+
+function checkLine (line, maxLength) {
+  return line.length <= maxLength;
+}
 
 function getRandom (min, max) {
   [min, max]=[Math.abs(min), Math.abs(max)];
